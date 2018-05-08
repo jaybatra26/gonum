@@ -84,6 +84,22 @@ var operationNames = map[Operation]string{
 	signalDone:     "signalDone",
 }
 
+<<<<<<< HEAD
+=======
+// Location represents a location in the optimization procedure.
+type Location struct {
+	// X is the parameters of estimation.
+	X []float64
+
+	// F is the computed value of the objective function, given X.
+	F float64
+
+	// Gradient and Hessian are self explanatory.
+	Gradient []float64
+	Hessian  *mat.SymDense
+}
+
+>>>>>>> Added a sketch of Brent primarily for a sanity check by @btracey
 // Result represents the answer of an optimization run. It contains the optimum
 // function value, X location, and gradient as well as the Status at convergence
 // and Statistics taken during the run.
