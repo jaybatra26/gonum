@@ -11,7 +11,7 @@ const (
 type brentIterType int
 
 var (
-	_ Method = &Brent{}
+	_ Method = (*Brent)(nil)
 )
 
 const (
@@ -37,7 +37,7 @@ type Brent struct {
 	iter           brentIterType
 }
 
-func (b *Brent) Init(loc *Location) (Operation, error) {
+func (b *Brent) InitLocal(loc *Location) (Operation, error) {
 	if len(loc.X) != 1 {
 		panic("Expect only 1 parameter")
 	}
@@ -54,7 +54,7 @@ func (b *Brent) Init(loc *Location) (Operation, error) {
 	return FuncEvaluation, nil
 }
 
-func (b *Brent) Iterate(loc *Location) (Operation, error) {
+func (b *Brent) IterateLocal(loc *Location) (Operation, error) {
 	switch b.iter {
 	case brentBrakA, brentBrakB, brentBrakC:
 		return b.bracket(b.iter, loc)
@@ -65,7 +65,7 @@ func (b *Brent) Iterate(loc *Location) (Operation, error) {
 	return FuncEvaluation, nil
 }
 
-func (*Brent) Needs() struct {
+func (*Brent) needs() struct {
 	Gradient bool
 	Hessian  bool
 } {
